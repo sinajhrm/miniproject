@@ -13,8 +13,15 @@ GET http://localhost:3001/api/currency/11d223
 GET http://localhost:3001/api/currency/9999999
 ###
 
-POST http://localhost:3001/api/currency?currencyCode=EUR&country=Europe&conversionRate=.68
+POST http://localhost:3001/api/currency
 # Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
+
+{
+    "currencyCode":"EUR",
+    "country":"Europe",
+    "conversionRate":".68"
+}
 ###
 
 PUT http://localhost:3001/api/currency/3/.679

@@ -14,7 +14,7 @@ app.use(express.json())
 
 
 /* Useful examples: https://expressjs.com/en/resources/middleware/morgan.html */
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+app.use(morgan(':method :url :status :res[content] :res[content-length] - :response-time ms'))
 
 /**
  * DATA STORAGE
@@ -90,21 +90,22 @@ app.get('/api/currency/:id', (request, response) => {
  * @responds by returning the newly created resource
  */
 app.post('/api/currency', (request, response) => {
-  if (!('currencyCode' in request.query) ||
-    !('country' in request.query) ||
-    !('conversionRate' in request.query)) {
+  if (!('currencyCode' in request.body) ||
+    !('country' in request.body) ||
+    !('conversionRate' in request.body)) {
     response.status(400).send({ error: "Content missing!" });
     return;
   }
-  if (Number.isNaN(+request.query.conversionRate) || +request.query.conversionRate <= 0) {
+  if (Number.isNaN(+request.body.conversionRate) || +request.body.conversionRate <= 0) {
     response.status(422).send("Unprocessable Entity");
     return;
   }
 
   else {
-    let newCurrency = request.query;
+    let newCurrency = request.body;
     newCurrency.id = currencies.length + 1;
-    currencies.push(newCurrency);
+    // currencies.push(newCurrency);
+    currencies = currencies.concat(newCurrency);
     response.status(200).send(newCurrency);
   }
 
