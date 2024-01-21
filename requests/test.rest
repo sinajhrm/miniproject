@@ -1,10 +1,12 @@
 # For references/documentation: https://github.com/Huachao/vscode-restclient
+GET http://localhost:3001/
+###
 
 # Requests a list of available currencies
 GET http://localhost:3001/api/currency/
 ###
 # Requests a currency by ID
-GET http://localhost:3001/api/currency/1
+GET http://localhost:3001/api/currency/2
 ###
 # Requests a currency with invalid id
 GET http://localhost:3001/api/currency/11d223
