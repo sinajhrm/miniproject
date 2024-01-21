@@ -1,1 +1,24 @@
+# For references/documentation: https://github.com/Huachao/vscode-restclient
+
+# Requests a list of available currencies
 GET http://localhost:3001/api/currency/
+###
+# Requests a currency by ID
+GET http://localhost:3001/api/currency/1
+###
+# Requests a currency with invalid id
+GET http://localhost:3001/api/currency/11d223
+###
+# Requests a not existing currency
+GET http://localhost:3001/api/currency/9999999
+###
+
+POST http://localhost:3001/api/currency?currencyCode=EUR&country=Europe&conversionRate=.68
+# Content-Type: application/x-www-form-urlencoded
+###
+
+PUT http://localhost:3001/api/currency/3/.679
+###
+
+
+DELETE http://localhost:3001/api/currency/3
