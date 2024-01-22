@@ -2,6 +2,7 @@ const express = require('express')  // We import the express application
 const cors = require('cors') // Necessary for localhost
 const currenciesRouter = require('./routers/currency')
 const middlewares = require('./utils/middlewares')
+const { initConnection: initDBConnection } = require('./utils/database')
 
 const app = express() // Creates an express application in app
 
@@ -13,6 +14,8 @@ const app = express() // Creates an express application in app
 app.use(cors())
 app.use(express.json())
 app.use(middlewares.morgan_mw)
+
+initDBConnection();
 
 /**
  * TESTING Endpoint (Completed)

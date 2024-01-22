@@ -1,0 +1,20 @@
+const { sequelize } = require('../utils/database')
+const { DataTypes, Model } = require('sequelize')
+
+class Country extends Model { }
+
+Country.init(
+    {
+        id: {
+            type: DataTypes.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        name: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
+    }
+)
+
+module.exports = { Country }
