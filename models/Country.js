@@ -14,7 +14,12 @@ Country.init(
             type: DataTypes.STRING,
             allowNull: false
         }
-    }
+    }, {
+    sequelize,
+    underscored: false,
+    timestamps: true,
+    modelName: "Country"
+}
 )
 
-module.exports = { Country }
+module.exports = { Country } 

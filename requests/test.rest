@@ -20,9 +20,9 @@ POST http://localhost:3001/api/currency
 Content-Type: application/json
 
 {
-    "currencyCode":"EUR",
-    "country":"Europe",
-    "conversionRate":".68"
+    "currencyCode":"GBP",
+    "countryId":"3",
+    "conversionRate":".58"
 }
 ###
 

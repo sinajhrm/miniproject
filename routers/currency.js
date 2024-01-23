@@ -1,4 +1,6 @@
 const currenciesRouter = require('express').Router()
+const { Country } = require('../models/Country');
+const { Currency } = require('../models/Currency')
 
 /**
  * DATA STORAGE
@@ -9,20 +11,20 @@ const currenciesRouter = require('express').Router()
  * country: a string, the name of the country
  * conversionRate: the amount, in that currency, required to equal 1 Canadian dollar
  */
-let currencies = [
-  {
-    id: 1,
-    currencyCode: "CDN",
-    country: "Canada",
-    conversionRate: 1
-  },
-  {
-    id: 2,
-    currencyCode: "USD",
-    country: "United States of America",
-    conversionRate: 0.75
-  }
-]
+// let currencies = [
+//   {
+//     id: 1,
+//     currencyCode: "CDN",
+//     country: "Canada",
+//     conversionRate: 1
+//   },
+//   {
+//     id: 2,
+//     currencyCode: "USD",
+//     country: "United States of America",
+//     conversionRate: 0.75
+//   }
+// ]
 
 
 /**
@@ -30,33 +32,47 @@ let currencies = [
  * @receives a get request to the URL: http://localhost:3001/api/currency/
  * @responds with returning the data as a JSON
  */
-currenciesRouter.get('/', (request, response) => {
-  response.json(currencies)
+currenciesRouter.get('/', async (request, response) => {
+  try {
+    const currencies = await Currency.findAll();
+    response.json(currencies);
+  } catch (error) {
+    console.log("Error happened while getting all currencies from DB!")
+    console.error(error.message)
+    response.sendStatus(500);
+  }
 })
 
 /**
  * TODO: GET:id Endpoint
  * @receives a get request to the URL: http://localhost:3001/api/currency/:id
  * @responds with returning specific data as a JSON
- */
-currenciesRouter.get('/:id', (request, response) => {
+*/
+currenciesRouter.get('/:id', async (request, response) => {
   /*
-   Based on this answer on stackoverflow: https://stackoverflow.com/a/42171674
-   I use error code 422 as server's response for an invalid input
+  Based on this answer on stackoverflow: https://stackoverflow.com/a/42171674
+  I use error code 422 as server's response for an invalid input
   */
   if (!Number.isInteger(+request.params.id) || Number(request.params.id) < 1) {
     response.status(422).send({ error: "Unprocessable Entity!" });
     return; // QUESTION: Is it a correct approach to terminate a request?
   }
+  try {
 
-  result = currencies.filter(currency => currency.id === parseInt(request.params.id))
+    result = await Currency.findOne({ where: { id: +request.params.id } })
 
-  if (result.length === 0) {
-    response.status(404).send({ error: "Resource not found!" });
-    return;
+    if (result.length === null) {
+      response.status(404).send({ error: "Resource not found!" });
+      return;
+    }
+
+    response.json(result[0]);
   }
-
-  response.json(result[0]);
+  catch (error) {
+    console.log("An error happened while getting currency with the given ID.")
+    console.error(error.message)
+    response.sendStatus(500);
+  }
 })
 
 /**
@@ -65,9 +81,9 @@ currenciesRouter.get('/:id', (request, response) => {
  * with data object enclosed
  * @responds by returning the newly created resource
  */
-currenciesRouter.post('/', (request, response) => {
+currenciesRouter.post('/', async (request, response) => {
   if (!('currencyCode' in request.body) ||
-    !('country' in request.body) ||
+    !('countryId' in request.body) ||
     !('conversionRate' in request.body)) {
     response.status(400).send({ error: "Content missing!" });
     return;
@@ -76,14 +92,37 @@ currenciesRouter.post('/', (request, response) => {
     response.status(422).send("Unprocessable Entity");
     return;
   }
+  if (!Number.isInteger(+request.body.countryId) || Number(request.body.countryId) < 1) {
+    response.status(422).send({ error: "Unprocessable Entity (Invalid Country Id)!" });
+    return; // QUESTION: Is it a correct approach to terminate a request?
+  }
 
   else {
-    let newCurrency = request.body;
-    newCurrency.id = currencies.length + 1;
-    // currencies.push(newCurrency);
-    //QUESTION: why I should use concat, filter, ...
-    currencies = currencies.concat(newCurrency);
-    response.status(200).send(newCurrency);
+    try {
+      let currency = await Currency.findOne({ where: { currencyCode: request.body.currencyCode } })
+      let country = await Country.findOne({ where: { id: Number(request.body.countryId) } })
+
+      if (currency !== null) {
+        response.status(202).send({ message: "The given currency already exists in database!" })
+        return;
+      }
+
+      if (country === null) {
+        response.status(400).send({ error: "Invalid country ID!" })
+        return;
+      }
+
+      await Currency.create(
+        request.body
+      )
+
+      response.status(200).send(request.body);
+    }
+    catch (error) {
+      console.log("An error happened while adding new currency!")
+      console.error(error.message)
+      response.sendStatus(500);
+    }
   }
 
 })
