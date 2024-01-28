@@ -1,6 +1,8 @@
 const express = require('express')  // We import the express application
 const cors = require('cors') // Necessary for localhost
-const currenciesRouter = require('./routers/currency')
+const { currenciesRouter } = require('./routers/currency')
+const { countriesRouter } = require('./routers/country')
+const { currencyCountryRouter } = require('./routers/currency_coutnry')
 const middlewares = require('./utils/middlewares')
 const { initConnection: initDBConnection } = require('./utils/database')
 
@@ -23,13 +25,15 @@ initDBConnection();
  * @responds with the string 'Hello World!'
  */
 app.get('/', (request, response) => {
-  response.send('Hello World!')
+	response.send('Hello World!')
 })
 
 app.use('/api/currency', currenciesRouter)
+app.use('/api/country', countriesRouter)
+app.use('/api/currency-country', currencyCountryRouter)
 app.use(middlewares.unknownMiddleware)
 
 const PORT = 3001
 app.listen(PORT, () => {
-  console.log(`Server running on port: ${PORT}`)
+	console.log(`Server running on port: ${PORT}`)
 })

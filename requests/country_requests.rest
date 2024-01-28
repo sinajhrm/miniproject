@@ -1,0 +1,14 @@
+# Requests a list of available currencies
+GET http://localhost:3001/api/country/
+###
+
+POST http://localhost:3001/api/country
+# Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
+
+{
+    "name":"France"
+}
+###
+
+DELETE http://localhost:3001/api/country/4
