@@ -2,6 +2,7 @@
 *.pdf
 .env
 .vscode
+RefImg.png
 
 # Logs
 logs

@@ -1,6 +1,6 @@
+const { Country } = require('./Country')
 const { sequelize } = require('../utils/database')
 const { DataTypes, Model, Deferrable } = require('sequelize')
-const { Country } = require('./Country')
 
 class Currency extends Model { }
 
@@ -21,7 +21,7 @@ Currency.init({
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {
-            model: Currency,
+            model: Country,
             key: 'id',
             deferrable: Deferrable.INITIALLY_IMMEDIATE
             // For my reference: https://sequelize.org/docs/v6/core-concepts/model-basics/#column-options

@@ -1,0 +1,9 @@
+.divConvertCurrency {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem;
+}
+
+.divConvertCurrency>* {
+    margin: .2rem;
+}

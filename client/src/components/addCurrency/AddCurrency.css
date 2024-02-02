@@ -1,0 +1,9 @@
+.divAddCurrency {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem;
+}
+
+.divAddCurrency>* {
+    margin: .2rem;
+}
