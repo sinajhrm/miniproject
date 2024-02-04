@@ -43,6 +43,6 @@ Currency.init({
 })
 
 // For my reference: https://sequelize.org/docs/v6/core-concepts/assocs/#doing-both-things
-Currency.belongsTo(Country, { as: 'country', foreignKey: 'id' })
+Currency.belongsTo(Country, { as: 'country', foreignKey: 'countryId' })
 
 module.exports = { Currency } 

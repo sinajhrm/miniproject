@@ -55,7 +55,8 @@ const CurrencyService = {
      */
     update: async (currency) => {
         let result = '';
-        await axios.put(import.meta.env.VITE_API_CURRENCY_BURL + currency.id + "/" + currency.NewRate)
+        // console.log(import.meta.env.VITE_API_CURRENCY_BURL + currency.id + "/" + currency.newRate.toString())
+        await axios.put(import.meta.env.VITE_API_CURRENCY_BURL + currency.id + "/" + currency.newRate.toString())
             .then(value => {
                 result = value.data;
             })
@@ -70,7 +71,7 @@ const CurrencyService = {
      */
     delete: async (id) => {
         let result = '';
-        await axios.del(import.meta.env.VITE_API_CURRENCY_BURL + id)
+        await axios.delete(import.meta.env.VITE_API_CURRENCY_BURL + id)
             .then(value => {
                 result = value.data;
             })

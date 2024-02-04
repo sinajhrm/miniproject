@@ -1,0 +1,9 @@
+.divDeleteCountry {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem;
+}
+
+.divDeleteCountry>* {
+    margin: .2rem;
+}

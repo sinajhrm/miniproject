@@ -1,18 +1,39 @@
 // eslint-disable-next-line no-unused-vars
-import React from "react";
+import React, { useState } from "react";
 import './DeleteCurrency.css'
+import * as Types from '../../utils/types'
+import CurrencyService from "../../api/services/CurrencyService";
 
-export default function DeleteCurrency() {
+/**
+ * 
+ * @param {Types.DeleteCurrencyProps} props 
+ */
+export default function DeleteCurrency(props) {
+
+    const [selectedCurrencyId, setSelectedCurrencyId] = useState(-1);
+
+    const handleSelectedCurrencyIdChange = (chosenCurrencyId) => {
+        setSelectedCurrencyId(Number(chosenCurrencyId));
+    };
+
+    async function handleOnBtnDelete() {
+        if (selectedCurrencyId > 0) {
+            await CurrencyService.delete(selectedCurrencyId);
+            props.currenciesUpdateTrigger(true);
+        }
+    }
+
     return (<>
         <div className="divDeleteCurrency">
-            <select >
-                <option>Option 1</option>
-                <option>Option 2</option>
-                <option>Option 3</option>
-                <option>Option 4</option>
-                <option>Option 5</option>
+            <select onChange={(e) => handleSelectedCurrencyIdChange(e.target.value)} required>
+                <option value={0}>Select a currency ...</option>
+                {props.available_currencies.map((currency) => (
+                    <option key={currency.id} value={currency.id}>
+                        {currency.currencyCode + " | " + currency.conversionRate}
+                    </option>
+                ))}
             </select>
-            <button>Delete</button>
+            <button onClick={handleOnBtnDelete}>Delete</button>
         </div>
     </>)
 }

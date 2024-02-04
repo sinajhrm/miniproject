@@ -54,7 +54,7 @@ const CountryService = {
      */
     delete: async (id) => {
         let result = '';
-        await axios.del(import.meta.env.VITE_API_COUNTRY_BURL + id)
+        await axios.delete(import.meta.env.VITE_API_COUNTRY_BURL + id)
             .then(value => {
                 result = value.data;
             })
