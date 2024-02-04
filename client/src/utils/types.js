@@ -7,20 +7,23 @@
  * @property {number} countryId
  * @property {String} currencyCode
  * @property {number} conversionRate
- * F
+ * 
  * @typedef { object } Currency
  * @property { number } id
  * @property { number } countryId
- * @property { String } currencyCode
+ * @property { string } currencyCode
  * @property { number } conversionRate
+ * 
+ * @typedef {object} Country
+ * @property {number} id
+ * @property {string} name
+ * 
+ * @typedef {object} AddCountryRequestParam
+ * @property {string} name
+ * 
+ * @typedef {object} CollapsibleProps
+ * @property {boolean?} open
+ * @property {string} title
+ * @property {*} children
  */
-
-
-
-
-
-
-
-
-
 export const Types = {}

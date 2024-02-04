@@ -3,10 +3,11 @@
     padding: .2rem;
     align-content: center;
     justify-content: space-evenly;
+    flex-direction: column;
 }
 
 .divUpdateCurrency>* {
-    margin: auto .2rem;
+    margin: .2rem;
 }
 
 .divUpdateCurrency select{

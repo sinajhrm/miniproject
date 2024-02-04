@@ -1,0 +1,40 @@
+.btn {
+    all: unset;
+}
+
+.card {
+    padding: 1rem;
+    transition-duration: 500ms;
+    border-radius: .5rem;
+}
+
+.card:hover {
+    transition-duration: 250ms;
+    background-color: rgb(255, 255, 255, 0.05);
+}
+
+.cardHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.cardHeader>hr {
+    flex-grow: 1;
+    margin: 0 .5rem;
+    border: 0;
+    background: radial-gradient(circle, rgb(71, 95, 255, .75) 0%, rgba(255, 255, 255, 0) 100%);
+    border-radius: .5rem;
+    height: .25rem;
+}
+
+.cardHeader>* {
+    margin: 0;
+    font-size: large;
+}
+
+.collapsible {
+    overflow: hidden;
+    transition: height 250ms ease-in-out;
+}

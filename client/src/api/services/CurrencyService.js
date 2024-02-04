@@ -21,7 +21,7 @@ const CurrencyService = {
     /**
      * Retrieves currency by Id.
      * @param {number} id 
-     * @returns The retrieved currency
+     * @returns {Types.Currency} The retrieved currency
      */
     GetCurrencyById: async (id) => {
         let result = '';
@@ -36,7 +36,7 @@ const CurrencyService = {
     /**
      * Adds a new currency asynchronously
      * @param {Types.AddCurrencyRequestParam} currency 
-     * @returns The newly added currency
+     * @returns {Types.Currency} The newly added currency
      */
     AddCurrency: async (currency) => {
         let result = '';
@@ -70,7 +70,7 @@ const CurrencyService = {
      */
     delete: async (id) => {
         let result = '';
-        await axios.put(import.meta.env.VITE_API_CURRENCY_BURL + id)
+        await axios.del(import.meta.env.VITE_API_CURRENCY_BURL + id)
             .then(value => {
                 result = value.data;
             })
