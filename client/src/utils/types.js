@@ -13,6 +13,15 @@
  * @property { number } countryId
  * @property { string } currencyCode
  * @property { number } conversionRate A positive number with floating point
+ *
+ * @typedef { object } CurrencyConvert Can be use as source or destination currency in ConvertCurrency function
+ * @property { number } conversionRate A positive number with floating point
+ * 
+ * @callback CurrencyConvertFunc
+ * @param {CurrencyConvert} currencySrc 
+ * @param {CurrencyConvert} currencyDest 
+ * @param {Number} amount
+ * @returns {Number} The converted value
  * 
  * @typedef {object} Country
  * @property {number} id
@@ -23,6 +32,7 @@
  * 
  * @typedef {object} ConvertCurrencyProps
  * @property {Array<Currency>} available_currencies
+ * @property {CurrencyConvertFunc|any} currencyConvertCallback
  * 
  * @typedef {object} UpdateCurrencyProps
  * @property {Array<Currency>} available_currencies

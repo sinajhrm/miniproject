@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import './App.css'
 
+import convertCurrencyFunc from '../../utils/currency_utils.js'
+
 import Login from '../login/login'
 import ConvertCurrency from '../convertCurrency/ConvertCurrency'
 import AddCurrency from '../addCurrency/AddCurrency'
@@ -50,7 +52,7 @@ function App() {
 					<Login />
 				</Collapsible>
 				<Collapsible title='Convert'>
-					<ConvertCurrency available_currencies={currencies} />
+					<ConvertCurrency available_currencies={currencies} currencyConvertCallback={convertCurrencyFunc} />
 				</Collapsible>
 				<Collapsible title='Add Currency'>
 					<AddCurrency available_countries={countries} currenciesUpdateTrigger={setCurrenciesNeedReloading} />

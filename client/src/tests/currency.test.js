@@ -1,5 +1,5 @@
-const convertCurrency = require('../utils/currency_utils') // Update this
-
+// const convertCurrencyFunc = require('../utils/currency_utils') // Update this
+import convertCurrencyFunc from '../utils/currency_utils'
 /**
  * The tests below will be based on the following conversion amounts,
  * where $1 CDN (Canadian dollar) is equivalent to $0.75 USD (US dollar), 
@@ -33,7 +33,7 @@ const gbpCurrency = {
  * Therefore, we should return the same amount
  */
 test('same currency conversion', () => {
-  const result = convertCurrency(cdnCurrency, cdnCurrency, 100)
+  const result = convertCurrencyFunc(cdnCurrency, cdnCurrency, 100)
   expect(result).toBe(100)
 })
 
@@ -44,10 +44,10 @@ test('same currency conversion', () => {
  */
 test('CDN to GBP conversion', () => {
   // Arrange
-  cdnAmountToConvert = 100
+  const cdnAmountToConvert = 100
 
   // Act
-  const result = +convertCurrency(cdnCurrency, gbpCurrency, cdnAmountToConvert).toFixed(2)
+  const result = +convertCurrencyFunc(cdnCurrency, gbpCurrency, cdnAmountToConvert).toFixed(2)
 
   // Assert
   expect(result).toBe(58)
@@ -58,14 +58,14 @@ test('CDN to GBP conversion', () => {
  * Write a test that performs a currency conversion from CDN to USD, for $75 CDN
  */
 test('CDN to USD conversion', () => {
-    // Arrange
-    cdnAmountToConvert = 75
+  // Arrange
+  const cdnAmountToConvert = 75
 
-    // Act
-    const result = +convertCurrency(cdnCurrency, usdCurrency, cdnAmountToConvert).toFixed(2)
-  
-    // Assert
-    expect(result).toBe(56.25)
+  // Act
+  const result = +convertCurrencyFunc(cdnCurrency, usdCurrency, cdnAmountToConvert).toFixed(2)
+
+  // Assert
+  expect(result).toBe(56.25)
 })
 
 /**
@@ -74,10 +74,10 @@ test('CDN to USD conversion', () => {
  */
 test('USD to GBP conversion', () => {
   // Arrange
-  usbAmountToConvert = 200
+  const usbAmountToConvert = 200
 
   // Act
-  const result = +convertCurrency(usdCurrency, gbpCurrency, usbAmountToConvert).toFixed(2)
+  const result = +convertCurrencyFunc(usdCurrency, gbpCurrency, usbAmountToConvert).toFixed(2)
 
   // Assert
   expect(result).toBe(154.67)
@@ -89,10 +89,10 @@ test('USD to GBP conversion', () => {
  */
 test('GBP to CDN conversion', () => {
   // Arrange
-  gbpAmountToConvert = 50
+  const gbpAmountToConvert = 50
 
   // Act
-  const result = +convertCurrency(gbpCurrency, usdCurrency, gbpAmountToConvert).toFixed(2)
+  const result = +convertCurrencyFunc(gbpCurrency, usdCurrency, gbpAmountToConvert).toFixed(2)
 
   // Assert
   expect(result).toBe(64.66)
