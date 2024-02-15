@@ -1,5 +1,5 @@
 const { Country } = require('./Country')
-const { sequelize } = require('../utils/database')
+const { sequelize } = require('../config/database')
 const { DataTypes, Model, Deferrable } = require('sequelize')
 
 class Currency extends Model { }

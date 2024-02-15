@@ -1,6 +1,7 @@
 const currenciesRouter = require('express').Router()
 const { Country } = require('../models/Country');
-const { Currency } = require('../models/Currency')
+// const { Currency } = require('../models/Currency')
+const Currency = process.env.NODE_ENV === "test" ? require('../models/testCurrency') : require('../models/Currency')
 
 /**
  * DATA STORAGE
@@ -66,7 +67,7 @@ currenciesRouter.get('/:id', async (request, response) => {
 			return;
 		}
 
-		response.json(result[0]);
+		response.json(result);
 	}
 	catch (error) {
 		console.log("An error happened while getting currency with the given ID.")

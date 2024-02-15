@@ -1,10 +1,12 @@
+require('dotenv').config()
+
 const express = require('express')  // We import the express application
 const cors = require('cors') // Necessary for localhost
 const { currenciesRouter } = require('./routers/currency')
 const { countriesRouter } = require('./routers/country')
 const { currencyCountryRouter } = require('./routers/currency_coutnry')
 const middlewares = require('./utils/middlewares')
-const { initConnection: initDBConnection } = require('./utils/database')
+const { initConnection: initDBConnection } = require('./config/database')
 
 const app = express() // Creates an express application in app
 
@@ -34,6 +36,8 @@ app.use('/api/currency-country', currencyCountryRouter)
 app.use(middlewares.unknownMiddleware)
 
 const PORT = 3001
-app.listen(PORT, () => {
+const CurrencyConverterServevr = app.listen(PORT, () => {
 	console.log(`Server running on port: ${PORT}`)
 })
+
+module.exports = CurrencyConverterServevr

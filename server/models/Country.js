@@ -1,4 +1,4 @@
-const { sequelize } = require('../utils/database')
+const { sequelize } = require('../config/database')
 const { DataTypes, Model } = require('sequelize')
 
 class Country extends Model { }

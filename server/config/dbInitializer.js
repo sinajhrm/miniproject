@@ -1,6 +1,6 @@
-const { sequelize, initConnection } = require("./utils/database")
-const { Country } = require('./models/Country')
-const { Currency } = require('./models/Currency')
+const { sequelize, initConnection } = require("../config/database")
+// const { Country } = require('../models/Country')
+// const { Currency } = require('../models/Currency')
 
 initConnection()
 
