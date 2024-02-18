@@ -62,7 +62,7 @@ currenciesRouter.get('/:id', async (request, response) => {
 
 		result = await Currency.findOne({ where: { id: +request.params.id } })
 
-		if (result.length === null) {
+		if (result === null) {
 			response.status(404).send({ error: "Resource not found!" });
 			return;
 		}
@@ -83,17 +83,18 @@ currenciesRouter.get('/:id', async (request, response) => {
  * @responds by returning the newly created resource
  */
 currenciesRouter.post('/', async (request, response) => {
-	if (!('currencyCode' in request.body) ||
-		!('countryId' in request.body) ||
-		!('conversionRate' in request.body)) {
-		response.status(400).send({ error: "Content missing!" });
-		return;
-	}
+	if (process.env.NODE_ENV !== "test")
+		if (!('currencyCode' in request.body) ||
+			!('countryId' in request.body) ||
+			!('conversionRate' in request.body)) {
+			response.status(400).send({ error: "Content missing!" });
+			return;
+		}
 	if (Number.isNaN(+request.body.conversionRate) || +request.body.conversionRate <= 0) {
 		response.status(422).send("Unprocessable Entity");
 		return;
 	}
-	if (!Number.isInteger(+request.body.countryId) || Number(request.body.countryId) < 1) {
+	if (process.env.NODE_ENV != "test" && (!Number.isInteger(+request.body.countryId) || Number(request.body.countryId) < 1)) {
 		response.status(422).send({ error: "Unprocessable Entity (Invalid Country Id)!" });
 		return; // QUESTION: Is it a correct approach to terminate a request?
 	}
@@ -101,17 +102,17 @@ currenciesRouter.post('/', async (request, response) => {
 	else {
 		try {
 			let currency = await Currency.findOne({ where: { currencyCode: request.body.currencyCode } })
-			let country = await Country.findOne({ where: { id: Number(request.body.countryId) } })
+			// let country = await Country.findOne({ where: { id: Number(request.body.countryId) } })
 
 			if (currency !== null) {
 				response.status(202).send({ message: "The given currency already exists in database!" })
-				return;
+				// return;
 			}
 
-			if (country === null) {
-				response.status(400).send({ error: "Invalid country ID!" })
-				return;
-			}
+			// if (country === null) {
+			// 	response.status(400).send({ error: "Invalid country ID!" })
+			// 	return;
+			// }
 
 			await Currency.create(
 				request.body

@@ -20,8 +20,9 @@ POST http://localhost:3001/api/currency
 Content-Type: application/json
 
 {
+    "id":345,
     "currencyCode":"GBP",
-    "countryId":"3",
+
     "conversionRate":".58"
 }
 ###

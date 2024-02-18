@@ -46,7 +46,6 @@ describe('GET tests', () => {
 
     // As stated above, we will compare the conversionRate and currencyCode
     const currencyReceived = response.body
-    console.log("+++++++++++++++++++++++++++++++++++:" + response.body + ":+++++++++++++++++++++++++++++++++++")
     expect(canadianCurrency.conversionRate).toEqual(currencyReceived.conversionRate)
     expect(canadianCurrency.currencyCode).toEqual(currencyReceived.currencyCode)
   })
@@ -62,22 +61,62 @@ describe('GET tests', () => {
 
 describe('POST tests', () => {
   // Add a currency, and verify that a currency is added to our database
-  test('adding a currency', () => {
+  test('adding a currency', async () => {
 
+    // Arrange
+    const newCurrencyToAdd =
+    {
+      id: 3,
+      currencyCode: "AUD",
+      conversionRate: 1.14
+    }
+
+    // Act
+    const response = await api.post('/api/currency').send(newCurrencyToAdd);
+    // console.log(response.body)
+    // Expect
+    const dbCurrencies = await helper.currenciesInDb();
+    expect(dbCurrencies.length).toBe(3)
+
+    expect(dbCurrencies.filter((currency) => {
+      return currency.id === newCurrencyToAdd.id &&
+        currency.conversionRate === newCurrencyToAdd.conversionRate &&
+        currency.currencyCode === newCurrencyToAdd.currencyCode;
+
+    }).length).toBe(1)
   })
 })
 
 describe('PUT tests', () => {
   // Update a currency, and verify that a currency has been updated
-  test('adding a currency', () => {
+  test('updating a currency', async () => {
 
+    // Arrange
+    const currencyToUpdate = helper.initialCurrencies[1];
+    const newConversionRate = 1.23;
+
+    // Act
+    const response = await api.put(`/api/currency/${currencyToUpdate.id}/${newConversionRate}`);
+    // console.log(response.body)
+    // Expect
+    const dbCurrencies = await helper.currenciesInDb();
+    expect(dbCurrencies.filter(currency => currency.id === currencyToUpdate.id)[0].conversionRate).toBe(newConversionRate)
   })
 })
 
 describe('DELETE tests', () => {
   // Delete a currency, and verify that a currency has been deleted
-  test('adding a currency', () => {
+  test('Deleting a currency', async () => {
 
+    // Arrange
+    const currencyToDelete = helper.initialCurrencies[1];
+
+    // Act
+    const response = await api.delete(`/api/currency/${currencyToDelete.id}`)
+
+    // Expect
+    const dbCurrencies = await helper.currenciesInDb();
+    expect(dbCurrencies.filter(currency => currency.id === currencyToDelete.id).length).toBe(0);
   })
 })
 

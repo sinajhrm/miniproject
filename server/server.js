@@ -31,8 +31,10 @@ app.get('/', (request, response) => {
 })
 
 app.use('/api/currency', currenciesRouter)
-app.use('/api/country', countriesRouter)
-app.use('/api/currency-country', currencyCountryRouter)
+// if (process.env.NODE_ENV !== "test")
+	app.use('/api/country', countriesRouter)
+// if (process.env.NODE_ENV !== "test")
+	app.use('/api/currency-country', currencyCountryRouter)
 app.use(middlewares.unknownMiddleware)
 
 const PORT = 3001

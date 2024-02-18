@@ -1,6 +1,6 @@
 const { sequelize, initConnection } = require("../config/database")
-// const { Country } = require('../models/Country')
-// const { Currency } = require('../models/Currency')
+const Country = process.env.NODE_ENV === "test" ? undefined : require('../models/Country')
+const Currency = process.env.NODE_ENV === "test" ? require('../models/testCurrency') : require('../models/Country')
 
 initConnection()
 

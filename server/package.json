@@ -6,6 +6,7 @@
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js",
+    "tst": "cross-env NODE_ENV=test nodemon server.js",
     "debug": "nodemon server.js",
     "initDB": "node dbInitializer.js",
     "test": "cross-env NODE_ENV=test jest --verbose -runInBand"
@@ -22,6 +23,7 @@
     "uuid": "^9.0.1"
   },
   "devDependencies": {
+    "@types/jest": "^29.5.12",
     "cross-env": "^7.0.3",
     "jest": "^29.7.0",
     "morgan": "^1.10.0",
