@@ -5,10 +5,10 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "dev": "nodemon server.js",
+    "dev": "cross-env NODE_ENV=dev nodemon server.js",
     "tst": "cross-env NODE_ENV=test nodemon server.js",
     "debug": "nodemon server.js",
-    "initDB": "node dbInitializer.js",
+    "initDB": "cross-env NODE_ENV=dev node ./config/dbInitializer.js",
     "test": "cross-env NODE_ENV=test jest --verbose -runInBand"
   },
   "author": "Sina",

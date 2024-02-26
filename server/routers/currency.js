@@ -1,38 +1,6 @@
 const currenciesRouter = require('express').Router()
-const { Country } = require('../models/Country');
-// const { Currency } = require('../models/Currency')
 const Currency = process.env.NODE_ENV === "test" ? require('../models/testCurrency') : require('../models/Currency')
 
-/**
- * DATA STORAGE
- * We're using a local variable 'currencies' to store our data: a list of currency objects
- * Each object represents a 'currency', and contains the following fields
- * id: a number, 
- * currencyCode: a string, three letters (see https://www.iban.com/currency-codes as reference)
- * country: a string, the name of the country
- * conversionRate: the amount, in that currency, required to equal 1 Canadian dollar
- */
-// let currencies = [
-//   {
-//     id: 1,
-//     currencyCode: "CDN",
-//     country: "Canada",
-//     conversionRate: 1
-//   },
-//   {
-//     id: 2,
-//     currencyCode: "USD",
-//     country: "United States of America",
-//     conversionRate: 0.75
-//   }
-// ]
-
-
-/**
- * TODO: GET Endpoint
- * @receives a get request to the URL: http://localhost:3001/api/currency/
- * @responds with returning the data as a JSON
- */
 currenciesRouter.get('/', async (request, response) => {
 	try {
 		const currencies = await Currency.findAll();
@@ -44,11 +12,6 @@ currenciesRouter.get('/', async (request, response) => {
 	}
 })
 
-/**
- * TODO: GET:id Endpoint
- * @receives a get request to the URL: http://localhost:3001/api/currency/:id
- * @responds with returning specific data as a JSON
-*/
 currenciesRouter.get('/:id', async (request, response) => {
 	/*
 	Based on this answer on stackoverflow: https://stackoverflow.com/a/42171674

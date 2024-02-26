@@ -1,6 +1,6 @@
 const countriesRouter = require('express').Router()
-
-const { Country } = require('../models/Country')
+const Country = process.env.NODE_ENV === "test" ? undefined : require('../models/Country')
+// const { Country } = require('../models/Country')
 
 
 /** 

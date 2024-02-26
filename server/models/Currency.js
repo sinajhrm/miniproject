@@ -1,4 +1,4 @@
-const { Country } = require('./Country')
+const  Country  = process.env.NODE_ENV === "test" ? undefined : require('./Country')
 const { sequelize } = require('../config/database')
 const { DataTypes, Model, Deferrable } = require('sequelize')
 
@@ -38,11 +38,12 @@ Currency.init({
 }, {
     sequelize,
     underscored: false,
-    timestamps: true,
+    timestamps: false,
     modelName: "Currency"
 })
 
-// For my reference: https://sequelize.org/docs/v6/core-concepts/assocs/#doing-both-things
-Currency.belongsTo(Country, { as: 'country', foreignKey: 'countryId' })
+if (process.env.NODE_ENV !== 'test')
+    // For my reference: https://sequelize.org/docs/v6/core-concepts/assocs/#doing-both-things
+    Currency.belongsTo(Country, { as: 'country', foreignKey: 'countryId' })
 
-module.exports = { Currency } 
+module.exports = Currency 

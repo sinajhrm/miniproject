@@ -9,6 +9,7 @@ const CountryService = {
      */
     GetAllCountries: async () => {
         let result = '';
+        console.log(import.meta.env.VITE_API_COUNTRY_BURL)
         await axios.get(import.meta.env.VITE_API_COUNTRY_BURL)
             .then(value => {
                 result = value.data;
