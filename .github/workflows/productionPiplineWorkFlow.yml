@@ -29,6 +29,7 @@ jobs:
     defaults:
       run:
         working-directory: ./client
+    needs: backendTestPipeline
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -47,7 +48,6 @@ jobs:
     defaults:
       run:
         working-directory: ./server
-    needs: frontEndTestPipeline
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
