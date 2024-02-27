@@ -58,6 +58,6 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Run frontend tests
+      - name: Run backend tests
         run: npm run test
   
