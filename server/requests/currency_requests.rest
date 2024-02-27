@@ -20,14 +20,14 @@ POST http://localhost:3001/api/currency
 Content-Type: application/json
 
 {
-    "currencyCode":"EUR",
-    "country":"Europe",
-    "conversionRate":".68"
+    "id":345,
+    "currencyCode":"GBP",
+
+    "conversionRate":".58"
 }
 ###
 
-PUT http://localhost:3001/api/currency/3/.679
+PUT http://localhost:3001/api/currency/3/.58
 ###
-
 
 DELETE http://localhost:3001/api/currency/3

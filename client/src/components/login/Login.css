@@ -1,0 +1,9 @@
+#userForm {
+    display: flex;
+    flex-direction: column;
+    padding: .2rem;
+}
+
+#userForm>* {
+    margin: .2rem;
+}

@@ -1,0 +1,3 @@
+# Requests a list of available currencies
+GET http://localhost:3001/api/currency-country/
+###

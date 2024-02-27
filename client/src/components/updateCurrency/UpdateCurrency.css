@@ -1,0 +1,15 @@
+.divUpdateCurrency {
+    display: flex;
+    padding: .2rem;
+    align-content: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+}
+
+.divUpdateCurrency>* {
+    margin: .2rem;
+}
+
+.divUpdateCurrency select{
+    min-width: 5rem;
+}
