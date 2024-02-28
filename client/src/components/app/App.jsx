@@ -8,7 +8,7 @@ import ConvertCurrency from '../convertCurrency/ConvertCurrency'
 import AddCurrency from '../addCurrency/AddCurrency'
 import DeleteCurrency from '../deleteCurrency/DeleteCurrency'
 import UpdateCurrency from '../updateCurrency/UpdateCurrency'
-import Collapsible from '../Collapsible/Collapsible'
+import Collapsible from '../collapsible/Collapsible'
 import AddCountry from '../addCountry/AddCountry.jsx'
 import DeleteCountry from '../deleteCountry/DeleteCountry.jsx'
 
