@@ -3,7 +3,7 @@ import './App.css'
 
 import convertCurrencyFunc from '../../utils/currency_utils.js'
 
-import Login from '../login/login'
+import Login from '../login/Login'
 import ConvertCurrency from '../convertCurrency/ConvertCurrency'
 import AddCurrency from '../addCurrency/AddCurrency'
 import DeleteCurrency from '../deleteCurrency/DeleteCurrency'
